@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 
 import com.ischeduler.gui.table.Month;
 import com.ischeduler.gui.table.TableManager;
+import com.ischeduler.gui.table.Year;
 
 /**
  * 
@@ -33,7 +34,9 @@ public class GUIManager<T extends TableManager> {
     }
     
     public static void main(String[] args) {
-        //some edit file
-        GUIManager<Month> gui = new GUIManager<Month>(new Month(new Date()));
+        
+    //    GUIManager<Month> gui = new GUIManager<Month>(new Month(new Date()));
+        
+        GUIManager<Year> gui = new GUIManager<Year>(new Year(new Date()));
     }
 }

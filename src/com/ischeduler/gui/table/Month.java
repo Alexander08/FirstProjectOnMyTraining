@@ -69,15 +69,15 @@ public class Month implements TableManager {
 
         this.daysGrid = new JPanel(new GridLayout(0, 7));
 
-        int DayOfWeek;
+        int dayOfWeek;
         DateFormat df = new SimpleDateFormat("dd");
         int maximNumberOfDays = this.currentDate.getActualMaximum(Calendar.DAY_OF_MONTH);
 
         while (this.currentDate.get(Calendar.DAY_OF_MONTH) <= maximNumberOfDays) {
 
-            DayOfWeek = this.currentDate.get(Calendar.DAY_OF_WEEK);
+            dayOfWeek = this.currentDate.get(Calendar.DAY_OF_WEEK);
 
-            if (DayOfWeek > (this.daysGrid.getComponentCount() + 2)) {
+            if (dayOfWeek > (this.daysGrid.getComponentCount() + 2)) {
 
                 constructDay(df, true);
 
