@@ -1,8 +1,8 @@
 package com.ischeduler.gui.table;
 
-import javax.swing.JComponent;
+import java.awt.Component;
 
 public interface TableManager {
 
-    JComponent getComponent();
+    Component getComponent();
 }

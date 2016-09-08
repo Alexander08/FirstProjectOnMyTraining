@@ -75,9 +75,9 @@ public class Month implements TableManager {
 
         while (this.currentDate.get(Calendar.DAY_OF_MONTH) <= maximNumberOfDays) {
 
-            dayOfWeek = this.currentDate.get(Calendar.DAY_OF_WEEK);
+            dayOfWeek = (this.currentDate.get(Calendar.DAY_OF_WEEK) + 5) % 7;
 
-            if (dayOfWeek > (this.daysGrid.getComponentCount() + 2)) {
+            if (dayOfWeek > (this.daysGrid.getComponentCount())) {
 
                 constructDay(df, true);
 
