@@ -18,6 +18,4 @@ public class TableHandler<T extends TableManager> {
     public void setComponent(T component) {
         this.component = component;
     }
-    
-    
 }

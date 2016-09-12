@@ -1,49 +1,86 @@
 package com.ischeduler.gui;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
-import java.util.Date;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import com.ischeduler.gui.table.Month;
+import com.ischeduler.gui.table.Day;
 import com.ischeduler.gui.table.TableManager;
-import com.ischeduler.gui.table.Year;
 
 /**
+ * GUIManager is a cross point class where main window load all components in a frame and make them
+ * visible on screen
+ * 
+ * @param window - are declared final to have access on the same object for change properties
  * 
  * 
- * */
+ */
 
 public class GUIManager {
 
-    private JFrame       window;
-
+    private final JFrame window;
     private TopMenu      menu;
-
     private TopButtons   buttonsArea;
-
     private TableManager table;
+    private JPanel       rightSide;
+
+
+    public GUIManager() {
+
+        super();
+
+        this.window = new JFrame("iScheduler2");
+        this.window.setLayout(new BorderLayout());
+
+        this.menu = new TopMenu();
+        this.window.setJMenuBar(this.menu.getMenuBar());
+
+        this.buttonsArea = new TopButtons(this);
+        this.window.add(this.buttonsArea.getComponent(), BorderLayout.NORTH);
+        
+    }
+
+
+
 
     public GUIManager(TableManager table) {
 
-        this.window = new JFrame("iScheduler2");
-        this.menu = new TopMenu();
+        this();
 
-        this.buttonsArea = new TopButtons();
         this.table = table;
+        this.window.add(this.table.getComponent(), BorderLayout.CENTER);
+    }
+    
+    /**
+     * 
+     */
+    public void setRightSide() {
+        
+        this.rightSide = new JPanel(new BorderLayout());
+        
+        JPanel right = (JPanel) new Day().getComponent();
+        right.setBorder(BorderFactory.createEmptyBorder(50, 10, 50, 10));
+        
+        this.rightSide.add(right, BorderLayout.CENTER);
+        
+        this.window.add(this.rightSide, BorderLayout.EAST);
+    }
 
-        this.window.setLayout(new BorderLayout());
-
-        this.window.setJMenuBar(this.menu.getMenuBar());
-
-        this.window.add(this.buttonsArea.getComponent(), BorderLayout.NORTH);
-        this.window.add(this.table.getComponent(), BorderLayout.CENTER); // Te pupa Jean :* merge!!!
+    /**
+     * 
+     */
+    public void launchFrame() {
 
         this.window.pack();
         this.window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.window.setVisible(true);
+    }
+
+    public JFrame getWindow() {
+
+        return this.window;
     }
 
     public void changeTable(TableManager table) {
@@ -53,22 +90,5 @@ public class GUIManager {
         this.window.add(this.table.getComponent());
 
         this.window.revalidate();
-    }
-
-    public static void main(String[] args) {
-
-        // GUIManager<Month> gui = new GUIManager<Month>(new Month(new Date()));
-
-        GUIManager gui = new GUIManager(new Year(new Date()));
-
-        try {
-            
-            Thread.sleep(10000);
-            
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        gui.changeTable(new Month(new Date()));
-
     }
 }

@@ -9,6 +9,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.ischeduler.gui.table.TableManager;
+import com.ischeduler.listener.ChangeToMonthTable;
+import com.ischeduler.listener.ChangeToWeekTable;
+import com.ischeduler.listener.ChangeToDayTable;
+import com.ischeduler.listener.ChangeToYearTable;
 
 public class TopButtons implements TableManager {
 
@@ -21,17 +25,25 @@ public class TopButtons implements TableManager {
     private JButton month;
     private JButton year;
 
-    public TopButtons() {
+    public TopButtons(GUIManager gui) {
 
-        this.buttonsTable = new JPanel(new GridLayout(1, 16));
+        this.buttonsTable = new JPanel(new GridLayout(1, 16, 3, 3));
 
         this.previous = new JButton(" << Previous");
         this.next = new JButton("Next >> ");
         this.today = new JButton("Today");
+
         this.day = new JButton("Day");
+        this.day.addActionListener(new ChangeToDayTable(gui));
+
         this.week = new JButton("Week");
+        this.week.addActionListener(new ChangeToWeekTable(gui));
+
         this.month = new JButton("Month");
+        this.month.addActionListener(new ChangeToMonthTable(gui));
+
         this.year = new JButton("Year");
+        this.year.addActionListener(new ChangeToYearTable(gui));
 
         this.buttonsTable.add(previous);
 

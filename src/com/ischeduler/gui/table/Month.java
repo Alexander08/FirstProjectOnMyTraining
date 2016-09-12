@@ -67,7 +67,7 @@ public class Month implements TableManager {
      */
     private void setDaysGrid() {
 
-        this.daysGrid = new JPanel(new GridLayout(0, 7));
+        this.daysGrid = new JPanel(new GridLayout(0, 7, 1, 1));
 
         int dayOfWeek;
         DateFormat df = new SimpleDateFormat("dd");
@@ -153,7 +153,7 @@ public class Month implements TableManager {
     private void setDayHeader() {
 
         DateFormat df = new SimpleDateFormat("EEEE");
-        this.daysHeaderLabel = new JPanel(new GridLayout(1, 7));
+        this.daysHeaderLabel = new JPanel(new GridLayout(1, 7, 1, 1));
 
         Calendar c = Calendar.getInstance();
         c.setFirstDayOfWeek(Calendar.MONDAY);
