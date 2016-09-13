@@ -1,6 +1,8 @@
 package com.ischeduler.gui;
 
 import java.awt.BorderLayout;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -20,17 +22,21 @@ import com.ischeduler.gui.table.TableManager;
 
 public class GUIManager {
 
-    private final JFrame window;
-    private TopMenu      menu;
-    private TopButtons   buttonsArea;
-    private TableManager table;
-    private JPanel       rightSide;
+    private final JFrame   window;
+    private TopMenu        menu;
+    private TopButtons     buttonsArea;
+    private TableManager   table;
+    private JPanel         rightSide;
+    final private Calendar currentDate;
 
 
     public GUIManager() {
 
         super();
 
+        this.currentDate = Calendar.getInstance();
+        this.currentDate.setTime(new Date());
+        
         this.window = new JFrame("iScheduler2");
         this.window.setLayout(new BorderLayout());
 
@@ -39,9 +45,8 @@ public class GUIManager {
 
         this.buttonsArea = new TopButtons(this);
         this.window.add(this.buttonsArea.getComponent(), BorderLayout.NORTH);
-        
-    }
 
+    }
 
 
 
@@ -52,19 +57,19 @@ public class GUIManager {
         this.table = table;
         this.window.add(this.table.getComponent(), BorderLayout.CENTER);
     }
-    
+
     /**
      * 
      */
     public void setRightSide() {
-        
+
         this.rightSide = new JPanel(new BorderLayout());
-        
+
         JPanel right = (JPanel) new Day().getComponent();
         right.setBorder(BorderFactory.createEmptyBorder(50, 10, 50, 10));
-        
+
         this.rightSide.add(right, BorderLayout.CENTER);
-        
+
         this.window.add(this.rightSide, BorderLayout.EAST);
     }
 
@@ -91,4 +96,10 @@ public class GUIManager {
 
         this.window.revalidate();
     }
+
+    public Calendar getCurrentDate() {
+        return this.currentDate;
+    }
+    
+    
 }

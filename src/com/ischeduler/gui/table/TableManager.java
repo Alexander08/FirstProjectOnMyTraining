@@ -5,4 +5,5 @@ import java.awt.Component;
 public interface TableManager {
 
     Component getComponent();
+    
 }

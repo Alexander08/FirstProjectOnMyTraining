@@ -54,7 +54,7 @@ public class Week implements TableManager {
             Day day = new Day(this.currentDate.getTime());
             this.weekGrid.add(day.getComponent());
 
-            this.currentDate.roll(Calendar.DAY_OF_WEEK, 1);
+            this.currentDate.add(Calendar.DAY_OF_WEEK, 1);
         }
 
         this.weekTable.add(this.weekGrid, BorderLayout.CENTER);

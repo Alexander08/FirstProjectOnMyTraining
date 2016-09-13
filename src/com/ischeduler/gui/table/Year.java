@@ -28,6 +28,11 @@ public class Year implements TableManager {
     private Locale   localZone;
 
 
+    public Year() {
+
+        this(new Date());
+    }   
+    
     public Year(Date date) {
 
         this.yearTable = new JPanel(new BorderLayout());
