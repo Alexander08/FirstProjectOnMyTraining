@@ -20,7 +20,7 @@ public class TopButtons implements TableManager {
     private JButton previous;
     private JButton next;
     private JButton today;
-    private JButton day;
+    private JButton day; // change with toggle button - give you two state ;)
     private JButton week;
     private JButton month;
     private JButton year;

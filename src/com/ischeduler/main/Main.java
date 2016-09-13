@@ -15,15 +15,6 @@ public class Main {
         GUIManager gui = new GUIManager(new Year(new Date()));
         gui.launchFrame();
         gui.setRightSide();
-        
-/*        try {
-
-            Thread.sleep(10000);
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        gui.changeTable(new Month(new Date()));*/
 
     }
 }
