@@ -80,6 +80,7 @@ public class GUIManager {
 
         this.window.pack();
         this.window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.window.setLocationRelativeTo(null);
         this.window.setVisible(true);
     }
 

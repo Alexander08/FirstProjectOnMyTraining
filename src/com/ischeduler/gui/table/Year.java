@@ -57,9 +57,11 @@ public class Year implements TableManager {
         
         this.monthsGrid.setBorder(new EmptyBorder(5, 10, 10, 10));
 
+        Month monthTable = new Month(this.currentDate.getTime());
+        
         for (int i = 1; i <= 12; i++) {
-
-            JPanel month = ((JPanel) new Month(this.currentDate.getTime()).getComponent());
+            monthTable = new Month(this.currentDate.getTime(), monthTable.getGroup());
+            JPanel month = ((JPanel) monthTable.getComponent());
             month.setBorder(BorderFactory.createLineBorder(Color.GRAY, 3));
 
             this.monthsGrid.add(month);

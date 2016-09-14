@@ -10,11 +10,15 @@ import java.util.Date;
 import java.util.Locale;
 
 import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
+
+import com.ischeduler.listener.manipulatetable.ChangeOnClick;
 
 /**
  * Class Month it is used to display a Month of a year in a JPanel Can be used to display any month
@@ -35,27 +39,34 @@ import javax.swing.SwingConstants;
 
 public class Month implements TableManager {
 
-    private JPanel   monthTable;
-    private JLabel   monthHeaderLabel;
+    private JPanel            monthTable;
+    private JLabel            monthHeaderLabel;
 
-    private JPanel   daysTable;
-    private JPanel   daysGrid;
-    private JPanel   daysHeaderLabel;
+    private JPanel            daysTable;
+    private JPanel            daysGrid;
+    private final ButtonGroup group;
+    private JPanel            daysHeaderLabel;
 
-    private Calendar currentDate;
-    private Locale   localZone;
+    private Calendar          currentDate;
+    private Locale            localZone;
 
 
-    public Month(Date date) {
+    public Month(Date date, ButtonGroup... group) {
 
         super();
+
+        if (group.length == 0 || group[0] == null) {
+            this.group = new ButtonGroup();
+
+        } else {
+            this.group = group[0];
+        }
         setDate(date);
 
         setMonthHeader();
 
         setDayHeader();
         setDaysGrid();
-
         this.monthTable = new JPanel(new BorderLayout());
         this.monthTable.add(this.monthHeaderLabel, BorderLayout.NORTH);
         this.monthTable.add(this.daysTable, BorderLayout.CENTER);
@@ -103,10 +114,14 @@ public class Month implements TableManager {
 
         if (!isEmpty) {
 
-            JButton day = new JButton(df.format(this.currentDate.getTime()));
+            JToggleButton day = new JToggleButton(df.format(this.currentDate.getTime()));
             day.setEnabled(true);
             day.setBackground(Color.WHITE);
             // here you add listeners for days ------------------------???>>>>>
+
+            day.addMouseListener(new ChangeOnClick());
+
+            this.group.add(day);
             this.daysGrid.add(day);
         } else {
 
@@ -177,5 +192,11 @@ public class Month implements TableManager {
         return this.monthTable;
     }
 
+
+    public ButtonGroup getGroup() {
+        return group;
+    }
+
+    
 
 }
