@@ -194,7 +194,8 @@ public class Month implements TableManager {
             JButton day = new JButton(df.format(c.getTime()));
             day.setEnabled(false);
             day.setBackground(Color.GRAY);
-            // ***************************** - - ->> this is the place where you can add Listeners
+            // ***************************** - - ->> this is the place where you can add Listeners!
+            // You don't need listeners on headers silly
             this.daysHeaderLabel.add(day);
             c.add(Calendar.DAY_OF_MONTH, 1);
         }

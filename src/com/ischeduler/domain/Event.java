@@ -94,6 +94,14 @@ public abstract class Event {
         this.reminder = reminder;
     }
 
+    public Boolean isDone() {
+        return done;
+    }
+
+    public void setDone(Boolean done) {
+        this.done = done;
+    }
+
 
 
 }

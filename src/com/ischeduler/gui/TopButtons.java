@@ -11,10 +11,11 @@ import javax.swing.JToggleButton;
 import javax.swing.border.EmptyBorder;
 
 import com.ischeduler.gui.table.TableManager;
+import com.ischeduler.gui.table.Year;
 import com.ischeduler.listener.ChangeToDayTable;
 import com.ischeduler.listener.ChangeToMonthTable;
+import com.ischeduler.listener.ChangeToTable;
 import com.ischeduler.listener.ChangeToWeekTable;
-import com.ischeduler.listener.ChangeToYearTable;
 import com.ischeduler.listener.GoNextPrev;
 
 public class TopButtons implements TableManager {
@@ -55,7 +56,8 @@ public class TopButtons implements TableManager {
         this.year = new JToggleButton("Year");
         this.year.setActionCommand("Year");
         this.year.setSelected(true);
-        this.year.addActionListener(new ChangeToYearTable(gui));
+//        this.year.addActionListener(new ChangeToYearTable(gui));
+        this.year.addActionListener( new ChangeToTable<Year>(gui, new Year() ));
 
         this.buttonsTable.add(previous);
 

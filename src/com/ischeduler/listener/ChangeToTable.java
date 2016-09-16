@@ -8,24 +8,24 @@ import java.util.Date;
 import com.ischeduler.gui.GUIManager;
 import com.ischeduler.gui.table.TableManager;
 
-public abstract class ChangeToTable implements ActionListener {
+// doesnt work because save the object
+// so, the same instance of the class is called again when the button is pressed
+// i think that the reference of table is removed from the pane,
+// in documentation, didnt say anything in delete the object
+// anyway, an object can be deleted permanently, if it has no reference anymore,
+// and when gc is called, can be removed
+// but i keep a reference right here
 
-    protected GUIManager   gui;
-    protected TableManager table;
 
-    public ChangeToTable(GUIManager gui, TableManager pane) {
+public /*abstract*/ class ChangeToTable<T extends TableManager> implements ActionListener {
+    protected GUIManager gui;
+    protected T          table;
+
+    public ChangeToTable(GUIManager gui, T pane) {
         super();
 
         this.gui = gui;
-        try {
-            this.table = pane.getClass().newInstance();
-        } catch (InstantiationException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        this.table = pane;
 
     }
 
