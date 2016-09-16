@@ -35,6 +35,21 @@ import com.ischeduler.listener.manipulatetable.ChangeOnClick;
  * 
  * 
  */
+/////////////////////////////////////// ------------------------------------?>> Dont forget to
+/////////////////////////////////////// extend JToggledButton for adding date field and a list of
+/////////////////////////////////////// events for that day it will be easy to implement all the
+/////////////////////////////////////// functionality. The other thing you can do is to use
+/////////////////////////////////////// ActionComand() on buttons, but as you saw last time, it is a
+/////////////////////////////////////// little bit harder to use that method... and also limited to
+/////////////////////////////////////// just a string. So if u use a specialized class to do that
+/////////////////////////////////////// job will be much better. Lets see, if YourJbuttonClass will
+/////////////////////////////////////// keep a list of events and a date (not really necessary) and
+/////////////////////////////////////// eventually a checker (not necessary again - you can take it
+/////////////////////////////////////// form list). oki, so what your button must do: - store an
+/////////////////////////////////////// event; - change color when there are events for that day. -
+/////////////////////////////////////// open a window to manage events - keep that on mind when you
+/////////////////////////////////////// implement that
+
 
 
 public class Month implements TableManager {
@@ -197,6 +212,6 @@ public class Month implements TableManager {
         return group;
     }
 
-    
+
 
 }

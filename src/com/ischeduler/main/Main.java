@@ -1,7 +1,5 @@
 package com.ischeduler.main;
 
-import java.util.Date;
-
 import com.ischeduler.gui.GUIManager;
 import com.ischeduler.gui.table.Year;
 
