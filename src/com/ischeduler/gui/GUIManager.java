@@ -36,7 +36,7 @@ public class GUIManager {
 
         this.currentDate = Calendar.getInstance();
         this.currentDate.setTime(new Date());
-        
+
         this.window = new JFrame("iScheduler2");
         this.window.setLayout(new BorderLayout());
 
@@ -80,6 +80,7 @@ public class GUIManager {
 
         this.window.pack();
         this.window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.window.setSize(1600, 900);
         this.window.setLocationRelativeTo(null);
         this.window.setVisible(true);
     }
@@ -101,6 +102,6 @@ public class GUIManager {
     public Calendar getCurrentDate() {
         return this.currentDate;
     }
-    
-    
+
+
 }
