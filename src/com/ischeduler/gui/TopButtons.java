@@ -10,12 +10,13 @@ import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import javax.swing.border.EmptyBorder;
 
+import com.ischeduler.gui.table.Day;
+import com.ischeduler.gui.table.Month;
 import com.ischeduler.gui.table.TableManager;
+import com.ischeduler.gui.table.Week;
 import com.ischeduler.gui.table.Year;
-import com.ischeduler.listener.ChangeToDayTable;
-import com.ischeduler.listener.ChangeToMonthTable;
+import com.ischeduler.listener.ChangeToday;
 import com.ischeduler.listener.ChangeToTable;
-import com.ischeduler.listener.ChangeToWeekTable;
 import com.ischeduler.listener.GoNextPrev;
 
 public class TopButtons implements TableManager {
@@ -43,21 +44,20 @@ public class TopButtons implements TableManager {
 
         this.day = new JToggleButton("Day");
         this.day.setActionCommand("Day");
-        this.day.addActionListener(new ChangeToDayTable(gui));
+        this.day.addActionListener(new ChangeToTable<Day>(gui, new Day()));
 
         this.week = new JToggleButton("Week");
         this.week.setActionCommand("Week");
-        this.week.addActionListener(new ChangeToWeekTable(gui));
-
+        this.week.addActionListener(new ChangeToTable<Week>(gui, new Week()));
+        
         this.month = new JToggleButton("Month");
         this.month.setActionCommand("Month");
-        this.month.addActionListener(new ChangeToMonthTable(gui));
+        this.month.addActionListener(new ChangeToTable<Month>(gui, new Month()));
 
         this.year = new JToggleButton("Year");
         this.year.setActionCommand("Year");
         this.year.setSelected(true);
-//        this.year.addActionListener(new ChangeToYearTable(gui));
-        this.year.addActionListener( new ChangeToTable<Year>(gui, new Year() ));
+        this.year.addActionListener(new ChangeToTable<Year>(gui, new Year()));
 
         this.buttonsTable.add(previous);
 
@@ -75,7 +75,7 @@ public class TopButtons implements TableManager {
 
         this.next.addActionListener(new GoNextPrev(gui, this.selectTable));
         this.previous.addActionListener(new GoNextPrev(gui, this.selectTable));
-        this.today.addActionListener(new ChangeToDayTable(gui, this.selectTable));
+        this.today.addActionListener(new ChangeToday(gui, this.selectTable));
 
 
         this.buttonsTable.add(this.day);

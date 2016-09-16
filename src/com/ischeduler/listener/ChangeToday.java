@@ -11,12 +11,12 @@ import javax.swing.JButton;
 import com.ischeduler.gui.GUIManager;
 import com.ischeduler.gui.table.Day;
 
-public class ChangeToDayTable implements ActionListener {
+public class ChangeToday implements ActionListener {
 
     private GUIManager  gui;
     private ButtonGroup buttonsGroup;
 
-    public ChangeToDayTable(GUIManager gui, ButtonGroup... group) {
+    public ChangeToday(GUIManager gui, ButtonGroup... group) {
         
         this.gui = gui;
         if (group.length != 0) {

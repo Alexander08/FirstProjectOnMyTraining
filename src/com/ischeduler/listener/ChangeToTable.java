@@ -17,9 +17,9 @@ import com.ischeduler.gui.table.TableManager;
 // but i keep a reference right here
 
 
-public /*abstract*/ class ChangeToTable<T extends TableManager> implements ActionListener {
+public /* abstract */ class ChangeToTable<T extends TableManager> implements ActionListener {
     protected GUIManager gui;
-    protected T          table;
+    protected T    table;
 
     public ChangeToTable(GUIManager gui, T pane) {
         super();
@@ -34,7 +34,15 @@ public /*abstract*/ class ChangeToTable<T extends TableManager> implements Actio
 
         final Calendar date = gui.getCurrentDate();
         date.setTime(new Date());
-        this.gui.changeTable(this.table);
+        try {
+            this.gui.changeTable(this.table.getClass().newInstance());
+        } catch (InstantiationException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        } catch (IllegalAccessException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
     }
 
 }

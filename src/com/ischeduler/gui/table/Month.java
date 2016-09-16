@@ -66,6 +66,10 @@ public class Month implements TableManager {
     private Locale            localZone;
 
 
+    public Month() {
+        this(new Date());
+    }
+
     public Month(Date date, ButtonGroup... group) {
 
         super();
