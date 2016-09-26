@@ -82,7 +82,7 @@ public class Year implements TableManager {
         
         this.yearHeaderLabel.setHorizontalAlignment(SwingConstants.CENTER);
         
-        Font fontForHeader = new Font(this.yearHeaderLabel.getName(), Font.PLAIN,
+        Font fontForHeader = new Font(this.yearHeaderLabel.getName(), Font.BOLD,
                 this.yearHeaderLabel.getFont().getSize() * 2);
         
         this.yearHeaderLabel.setFont(fontForHeader);

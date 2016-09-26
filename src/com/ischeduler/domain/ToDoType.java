@@ -1,5 +1,5 @@
 package com.ischeduler.domain;
 
-public class ToDoType {
+public class ToDoType extends Event {
 
 }

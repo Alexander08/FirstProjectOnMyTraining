@@ -15,9 +15,10 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 
+import com.ischeduler.domain.EventKeeper;
+import com.ischeduler.gui.MyJToggleButton;
 import com.ischeduler.listener.manipulatetable.ChangeOnClick;
 
 /**
@@ -64,6 +65,8 @@ public class Month implements TableManager {
 
     private Calendar          currentDate;
     private Locale            localZone;
+    
+    private final EventKeeper events;
 
 
     public Month() {
@@ -74,6 +77,8 @@ public class Month implements TableManager {
 
         super();
 
+        this.events = new EventKeeper();
+        
         if (group.length == 0 || group[0] == null) {
             this.group = new ButtonGroup();
 
@@ -133,12 +138,13 @@ public class Month implements TableManager {
 
         if (!isEmpty) {
 
-            JToggleButton day = new JToggleButton(df.format(this.currentDate.getTime()));
+            MyJToggleButton day = new MyJToggleButton(df.format(this.currentDate.getTime()),
+                    this.currentDate.getTime());
             day.setEnabled(true);
             day.setBackground(Color.WHITE);
             // here you add listeners for days ------------------------???>>>>>
 
-            day.addMouseListener(new ChangeOnClick());
+            day.addMouseListener(new ChangeOnClick(day.getEvents()));
 
             this.group.add(day);
             this.daysGrid.add(day);

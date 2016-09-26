@@ -1,5 +1,7 @@
 package com.ischeduler.domain;
 
+import java.io.Serializable;
+import java.text.DateFormat;
 import java.util.Date;
 
 
@@ -8,12 +10,12 @@ import java.util.Date;
  * Here are all the necessary data for an event. From this will tow particular type of events
  * which will implement their methods and specific business.
  * 
- * Another features of this class are serializabe and comparator.
+ * Another features of this class are serializable and comparator.
  * For easy store, and no lose of data serializable will be the best thing to use,
  * Comparable will be used for an "natural" order for store data using StartDate.
  * hashCode() and equals() will be used to compare two events and give easy access to every event.
  * */
-public abstract class Event {
+public abstract class Event implements Serializable, Comparable<Event> {
 
     private String  title;
     private Date    startDate;
@@ -102,6 +104,17 @@ public abstract class Event {
         this.done = done;
     }
 
+    @Override
+    public int compareTo(Event e){
 
+        return this.startDate.compareTo(e.getStartDate());
+    }
 
+    @Override
+    public String toString() {
+        return "Event [title=" + title + ", startDate=" + startDate + ", endDate=" + endDate
+                + ", reminderDate=" + reminderDate + ", description=" + description + ", reminder="
+                + reminder + ", done=" + done + "]";
+    }
+    
 }

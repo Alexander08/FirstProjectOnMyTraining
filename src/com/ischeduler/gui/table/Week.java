@@ -72,7 +72,7 @@ public class Week implements TableManager {
         this.weekHeader = new JLabel("Week number: " + nameWeek);
         this.weekHeader.setHorizontalAlignment(SwingConstants.CENTER);
         
-        Font fontForHeader = new Font(this.weekHeader.getName(), Font.PLAIN,
+        Font fontForHeader = new Font(this.weekHeader.getName(), Font.BOLD,
                 this.weekHeader.getFont().getSize() * 2);
 
         this.weekHeader.setFont(fontForHeader);

@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.BorderFactory;
+import javax.swing.JApplet;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -28,7 +29,6 @@ public class GUIManager {
     private TableManager   table;
     private JPanel         rightSide;
     final private Calendar currentDate;
-
 
     public GUIManager() {
 
@@ -97,11 +97,18 @@ public class GUIManager {
         this.window.add(this.table.getComponent());
 
         this.window.revalidate();
+        this.window.getContentPane().revalidate();// necessary for applet // dont forget that this
+                                                  // method is introduced in 1.7 so if you compile
+                                                  // in cmd will get an error
+        this.window.getContentPane().repaint(); // necessary for applet
     }
 
     public Calendar getCurrentDate() {
         return this.currentDate;
     }
 
+    public JPanel getRightSide() {
+        return this.rightSide;
+    }
 
 }

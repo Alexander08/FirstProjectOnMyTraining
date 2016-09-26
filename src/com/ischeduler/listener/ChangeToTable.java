@@ -38,6 +38,8 @@ public /* abstract */ class ChangeToTable<T extends TableManager> implements Act
         try {
             
             this.gui.changeTable(this.table.getClass().newInstance());
+            this.gui.getWindow().getContentPane().revalidate();// necessary for applet
+            this.gui.getWindow().getContentPane().repaint(); // necessary for applet
             
         } catch (InstantiationException e1) {
             

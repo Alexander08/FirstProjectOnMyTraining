@@ -1,5 +1,5 @@
 package com.ischeduler.domain;
 
-public class EventType {
+public class EventType extends Event {
 
 }
