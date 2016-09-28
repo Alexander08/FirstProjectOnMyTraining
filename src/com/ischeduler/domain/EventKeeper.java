@@ -3,6 +3,8 @@ package com.ischeduler.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -26,7 +28,7 @@ import java.util.List;
  * Aretard!
  * 
  */
-public class EventKeeper implements Serializable {
+public class EventKeeper implements Serializable{
 
     private List<Event> eventList;
 
@@ -146,6 +148,9 @@ public class EventKeeper implements Serializable {
         dateToCompare.set(Calendar.MILLISECOND, 0);
 
         return dateToCompare;
+    }
+    public void sortEvents(){
+        Collections.sort(this.eventList);
     }
 
     /**

@@ -81,7 +81,6 @@ public class CreateEventDialog implements ActionListener {
         fillFields(new EventType(this.currDate.getTime()));
     }
 
-    // public CreateEventDialog(List<Event> events, Date date) {
     public CreateEventDialog(EventKeeper events, Date date) {
 
         this(date);
@@ -89,6 +88,7 @@ public class CreateEventDialog implements ActionListener {
         this.eventsList = events;
         this.eventsListForToday = new EventKeeper();
         this.eventsListForToday.setEventList(this.eventsList.getEventsForDay(date));
+        this.eventsListForToday.sortEvents();
         createListPane();
 
         this.dialogPane.add(southButtons(), BorderLayout.SOUTH);
@@ -111,7 +111,7 @@ public class CreateEventDialog implements ActionListener {
         Event event = this.eventsListForToday.getEvent(0);
         fillFields(event);
     }
-    
+
     private void createListPane() {
         int nrOfEvents = this.eventsListForToday.size();
         this.eventsListPane = new JPanel(new GridLayout(nrOfEvents, 1));
@@ -426,30 +426,33 @@ public class CreateEventDialog implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        // int index = Integer.parseInt(e.getActionCommand()) - 1;
         int index = Integer.parseInt(this.eventGroup.getSelection().getActionCommand()) - 1;
 
         if (e.getActionCommand().equals("done")) {
-            
+
             Event ev = this.eventsListForToday.getEvent(index);
             this.eventsListForToday.getEventList().remove(ev);
             this.eventsList.getEventList().remove(ev);
-            
+
             ev.setDone(true);
             this.eventsList.addEvent(ev);
-            
+            this.eventsListForToday.addEvent(ev);
+            this.eventsListForToday.sortEvents();
+            repaintList(this.eventsListForToday.size());
+
         } else if (e.getActionCommand().equals("delete")) {
 
             this.eventsList.getEventList().remove(this.eventsListForToday.deleteEvent(index));
+            this.eventsListForToday.sortEvents();
             repaintList(this.eventsListForToday.size());
         } else if (e.getActionCommand().equals("modiffy")) {
-            
+
             this.eventsList.getEventList().remove(this.eventsListForToday.deleteEvent(index));
             createAndSaveAnEvent();
             repaintList(this.eventsListForToday.size());
-        }else{
-            
-            fillFields(this.eventsListForToday.getEvent(index)); 
+        } else {
+
+            fillFields(this.eventsListForToday.getEvent(index));
         }
     }
 
@@ -488,6 +491,7 @@ public class CreateEventDialog implements ActionListener {
 
             this.eventsList.addEvent(event);
             this.eventsListForToday.addEvent(event);
+            this.eventsListForToday.sortEvents();
 
         } catch (ParseException e1) {
 
@@ -497,6 +501,5 @@ public class CreateEventDialog implements ActionListener {
 
             event = null;
         }
-System.out.println(event);
     }
 }

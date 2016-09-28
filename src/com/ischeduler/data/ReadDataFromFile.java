@@ -17,8 +17,6 @@ import com.ischeduler.domain.EventKeeper;
 
 public class ReadDataFromFile implements ActionListener {
 
-
-
     private JFileChooser      fileChooser;
     private File              file;
 

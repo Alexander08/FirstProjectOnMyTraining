@@ -32,12 +32,12 @@ public class Year implements TableManager {
     private final EventKeeper eventsList;
 
     public Year() {
-
+        
         this(new Date(), new EventKeeper());
     }
 
     public Year(Date date, EventKeeper ek) {
-
+        super();
         this.yearTable = new JPanel(new BorderLayout());
 
         this.eventsList = new EventKeeper();
