@@ -5,10 +5,10 @@ import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.BorderFactory;
-import javax.swing.JApplet;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import com.ischeduler.domain.EventKeeper;
 import com.ischeduler.gui.table.Day;
 import com.ischeduler.gui.table.TableManager;
 
@@ -23,16 +23,20 @@ import com.ischeduler.gui.table.TableManager;
 
 public class GUIManager {
 
-    private final JFrame   window;
-    private TopMenu        menu;
-    private TopButtons     buttonsArea;
-    private TableManager   table;
-    private JPanel         rightSide;
-    final private Calendar currentDate;
+    private final JFrame      window;
+    private TopMenu           menu;
+    private TopButtons        buttonsArea;
+    private TableManager      table;
+    private JPanel            rightSide;
+    private final Calendar    currentDate;
+
+    private final EventKeeper eventsList;
 
     public GUIManager() {
 
         super();
+
+        this.eventsList = new EventKeeper();
 
         this.currentDate = Calendar.getInstance();
         this.currentDate.setTime(new Date());
@@ -40,7 +44,7 @@ public class GUIManager {
         this.window = new JFrame("iScheduler2");
         this.window.setLayout(new BorderLayout());
 
-        this.menu = new TopMenu();
+        this.menu = new TopMenu(this);
         this.window.setJMenuBar(this.menu.getMenuBar());
 
         this.buttonsArea = new TopButtons(this);
@@ -55,6 +59,7 @@ public class GUIManager {
         this();
 
         this.table = table;
+        this.table.setEventsList(this.eventsList);
         this.window.add(this.table.getComponent(), BorderLayout.CENTER);
     }
 
@@ -93,13 +98,16 @@ public class GUIManager {
     public void changeTable(TableManager table) {
 
         this.window.remove(this.table.getComponent());
-        this.table = table;
-        this.window.add(this.table.getComponent());
 
+        this.table = table;
+        this.table.setEventsList(this.eventsList);
+
+        this.window.add(this.table.getComponent());
         this.window.revalidate();
         this.window.getContentPane().revalidate();// necessary for applet // dont forget that this
-                                                  // method is introduced in 1.7 so if you compile
-                                                  // in cmd will get an error
+                                                  // method was introduced in 1.7 so if you compile
+                                                  // in cmd will get an error (use instead
+                                                  // invalidate, validate)
         this.window.getContentPane().repaint(); // necessary for applet
     }
 
@@ -110,5 +118,12 @@ public class GUIManager {
     public JPanel getRightSide() {
         return this.rightSide;
     }
+
+
+
+    public EventKeeper getEventsList() {
+        return eventsList;
+    }
+
 
 }

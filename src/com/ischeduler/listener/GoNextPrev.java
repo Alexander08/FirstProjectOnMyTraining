@@ -16,9 +16,9 @@ import com.ischeduler.gui.table.Year;
 
 public class GoNextPrev implements ActionListener {
 
-    ButtonGroup selection;
-    GUIManager  gui;
-    Calendar    date;
+    private final ButtonGroup selection;
+    private final GUIManager  gui;
+    private Calendar          date;
 
     public GoNextPrev(GUIManager gui, ButtonGroup selection) {
 
@@ -38,7 +38,7 @@ public class GoNextPrev implements ActionListener {
             if (button.getActionCommand() == "Year") {
 
                 date.add(Calendar.YEAR, 1);
-                gui.changeTable(new Year(date.getTime()));
+                gui.changeTable(new Year(date.getTime(), gui.getEventsList()));
 
             } else if (button.getActionCommand() == "Month") {
 
@@ -48,7 +48,7 @@ public class GoNextPrev implements ActionListener {
             } else if (button.getActionCommand() == "Week") {
 
                 date.add(Calendar.WEEK_OF_YEAR, 1);
-                gui.changeTable(new Week(date.getTime()));
+                gui.changeTable(new Week(date.getTime(), gui.getEventsList()));
 
             } else if (button.getActionCommand() == "Day") {
 
@@ -59,7 +59,7 @@ public class GoNextPrev implements ActionListener {
             if (button.getActionCommand() == "Year") {
 
                 date.add(Calendar.YEAR, -1);
-                gui.changeTable(new Year(date.getTime()));
+                gui.changeTable(new Year(date.getTime(), gui.getEventsList()));
 
             } else if (button.getActionCommand() == "Month") {
 
@@ -69,7 +69,7 @@ public class GoNextPrev implements ActionListener {
             } else if (button.getActionCommand() == "Week") {
 
                 date.add(Calendar.WEEK_OF_YEAR, -1);
-                gui.changeTable(new Week(date.getTime()));
+                gui.changeTable(new Week(date.getTime(), gui.getEventsList()));
 
             } else if (button.getActionCommand() == "Day") {
 

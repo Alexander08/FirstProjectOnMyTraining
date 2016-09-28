@@ -10,39 +10,59 @@ import java.util.Date;
 import java.util.Locale;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
+import javax.swing.ButtonGroup;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import com.ischeduler.domain.EventKeeper;
+import com.ischeduler.gui.gridbuttons.MyJToggleButtonHour;
+import com.ischeduler.listener.manipulatetable.AddOrEditEventOnClickDay;
+import com.ischeduler.listener.manipulatetable.AddOrEditEventOnClickHour;
+
 
 public class Day implements TableManager {
 
-    private JPanel   dayTable;
-    private JLabel   dayHeader;
-    private JPanel   hoursGrid;
-    private Calendar currentDate;
-    private Locale   localeZone;
-
+    private JPanel            dayTable;
+    private JLabel            dayHeader;
+    private JPanel            hoursGrid;
+    private Calendar          currentDate;
+    private Locale            localeZone;
+    private final EventKeeper eventsList;
+    private final ButtonGroup group;
 
     public Day() {
 
         this(new Date());
     }
 
-    public Day(Date date) {
-        
+    public Day(Date date, ButtonGroup... group) {
+
         super();
 
         this.dayTable = new JPanel(new BorderLayout());
+        
+        if (group.length == 0 || group[0] == null) {
+            this.group = new ButtonGroup();
 
+        } else {
+            this.group = group[0];
+        }
+
+
+        this.eventsList = new EventKeeper();
         this.setDate(date);
         this.setDayHeader();
         this.constructDayGrid();
 
     }
-
+    
+    public Day(Date date,EventKeeper ek) {
+    
+        this(date);
+        this.eventsList.setEventList(ek.getEventList());
+    }
     /**
      * 
      */
@@ -53,7 +73,7 @@ public class Day implements TableManager {
 
         dayHeader = new JLabel(nameOfDay.toUpperCase());
         dayHeader.setHorizontalAlignment(SwingConstants.CENTER);
-       
+
         this.dayTable.add(this.dayHeader, BorderLayout.NORTH);
     }
 
@@ -82,13 +102,17 @@ public class Day implements TableManager {
 
         for (int i = 0; i < 24; i++) {
 
-            JButton hour = new JButton(hourFormat.format(this.currentDate.getTime()));
+            MyJToggleButtonHour hour =
+                    new MyJToggleButtonHour(hourFormat.format(this.currentDate.getTime()),
+                            this.currentDate.getTime(), this.eventsList);
 
             hour.setBackground(Color.WHITE);
             hour.setActionCommand(dateFormat.format(this.currentDate.getTime()));
             // --------------------->>>> here is where you can add Listeners for day
-            this.hoursGrid.add(hour);
+            hour.addMouseListener(new AddOrEditEventOnClickHour(this.eventsList));
 
+            this.group.add(hour);
+            this.hoursGrid.add(hour);
             this.currentDate.roll(Calendar.HOUR_OF_DAY, 1); // possibly need i instead of 1
         }
 
@@ -99,6 +123,22 @@ public class Day implements TableManager {
     public JComponent getComponent() {
 
         return this.dayTable;
+    }
+
+    @Override
+    public void setEventsList(EventKeeper ek) {
+        this.eventsList.setEventList(ek.getEventList());
+
+    }
+
+    @Override
+    public EventKeeper getEventsList() {
+        // TODO Auto-generated method stub
+        return this.eventsList;
+    }
+
+    public ButtonGroup getGroup() {
+        return group;
     }
 
 }

@@ -10,31 +10,40 @@ import java.util.Date;
 import java.util.Locale;
 
 import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import com.ischeduler.domain.EventKeeper;
+
 
 public class Week implements TableManager {
 
-    private JPanel   weekTable;
-    private JLabel   weekHeader;
-    private JPanel   weekGrid;
-    private Calendar currentDate;
-    private Locale   localZone;
+    private JPanel            weekTable;
+    private JLabel            weekHeader;
+    private JPanel            weekGrid;
+
+    private Calendar          currentDate;
+    private Locale            localZone;
+    private final EventKeeper eventsList;
+
 
 
     public Week() {
 
-        this(new Date());
+        this(new Date(), new EventKeeper());
     }
 
-    public Week(Date date) {
+    public Week(Date date, EventKeeper ek) {
 
         super();
-        
+
         this.weekTable = new JPanel(new BorderLayout());
+
+        this.eventsList = new EventKeeper();
+        this.eventsList.setEventList(ek.getEventList());
 
         this.setDate(date);
         this.setHeaderOfWeek();
@@ -49,9 +58,13 @@ public class Week implements TableManager {
 
         this.weekGrid = new JPanel(new GridLayout(1, 7, 1, 1));
 
+        Day day = new Day(this.currentDate.getTime());
         for (int i = 0; i < 7; i++) {
 
-            Day day = new Day(this.currentDate.getTime());
+           day = new Day(this.currentDate.getTime(), day.getGroup());
+           day.setEventsList(this.eventsList);
+
+            // this.group.add(day);
             this.weekGrid.add(day.getComponent());
 
             this.currentDate.add(Calendar.DAY_OF_WEEK, 1);
@@ -71,13 +84,13 @@ public class Week implements TableManager {
 
         this.weekHeader = new JLabel("Week number: " + nameWeek);
         this.weekHeader.setHorizontalAlignment(SwingConstants.CENTER);
-        
+
         Font fontForHeader = new Font(this.weekHeader.getName(), Font.BOLD,
                 this.weekHeader.getFont().getSize() * 2);
 
         this.weekHeader.setFont(fontForHeader);
         this.weekHeader.setBorder(BorderFactory.createEmptyBorder(10, 0, 20, 0));
-        
+
         this.weekTable.add(this.weekHeader, BorderLayout.NORTH);
     }
 
@@ -86,11 +99,11 @@ public class Week implements TableManager {
      * @param date
      */
     private void setDate(Date date) {
-        
+
         this.localZone = Locale.getDefault();
         this.currentDate = Calendar.getInstance(this.localZone);
         this.currentDate.setTime(date);
-        
+
         this.currentDate.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
     }
 
@@ -99,6 +112,17 @@ public class Week implements TableManager {
     public JComponent getComponent() {
 
         return this.weekTable;
+    }
+
+    @Override
+    public void setEventsList(EventKeeper ek) {
+        this.eventsList.setEventList(ek.getEventList());
+
+    }
+
+    @Override
+    public EventKeeper getEventsList() {
+        return this.eventsList;
     }
 
 }

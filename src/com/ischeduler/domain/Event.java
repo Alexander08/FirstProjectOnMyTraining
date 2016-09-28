@@ -36,6 +36,11 @@ public abstract class Event implements Serializable, Comparable<Event> {
         this.title = title;
     }
 
+    public Event(Date date) {
+        
+        this(new String(), date, date, date, new String());
+    }
+
     public Event(String title, Date startDate, Date endDate, Date reminderDate,
             String description) {
         super();
@@ -47,6 +52,7 @@ public abstract class Event implements Serializable, Comparable<Event> {
         this.reminder = false;
         this.done = false;
     }
+    
 
     public String getTitle() {
         return title;
@@ -61,7 +67,7 @@ public abstract class Event implements Serializable, Comparable<Event> {
     }
 
     public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+        this.startDate.setTime( startDate.getTime());
     }
 
     public Date getEndDate() {

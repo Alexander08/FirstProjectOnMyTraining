@@ -2,9 +2,11 @@ package com.ischeduler.listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Calendar;
 import java.util.Date;
 
+import com.ischeduler.domain.EventKeeper;
 import com.ischeduler.gui.GUIManager;
 import com.ischeduler.gui.table.TableManager;
 
@@ -18,15 +20,15 @@ import com.ischeduler.gui.table.TableManager;
 
 
 public /* abstract */ class ChangeToTable<T extends TableManager> implements ActionListener {
-    protected GUIManager gui;
-    protected T    table;
+
+    protected final GUIManager gui;
+    protected T                table;
 
     public ChangeToTable(GUIManager gui, T pane) {
         super();
 
         this.gui = gui;
         this.table = pane;
-
     }
 
     @Override
@@ -34,18 +36,23 @@ public /* abstract */ class ChangeToTable<T extends TableManager> implements Act
 
         final Calendar date = gui.getCurrentDate();
         date.setTime(new Date());
-        
+
         try {
-            
-            this.gui.changeTable(this.table.getClass().newInstance());
+
+            Class[] argType = new Class[] {Date.class, EventKeeper.class};
+
+            TableManager newTable = this.table.getClass().getDeclaredConstructor(argType)
+                    .newInstance(date.getTime(), gui.getEventsList());
+
+            this.gui.changeTable(newTable);
             this.gui.getWindow().getContentPane().revalidate();// necessary for applet
             this.gui.getWindow().getContentPane().repaint(); // necessary for applet
-            
+
         } catch (InstantiationException e1) {
-            
+
             e1.printStackTrace();
-        } catch (IllegalAccessException e1) {
-            
+        } catch (Exception e1) {
+
             e1.printStackTrace();
         }
     }

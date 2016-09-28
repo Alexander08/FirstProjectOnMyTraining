@@ -18,8 +18,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import com.ischeduler.domain.EventKeeper;
-import com.ischeduler.gui.MyJToggleButton;
-import com.ischeduler.listener.manipulatetable.ChangeOnClick;
+import com.ischeduler.gui.gridbuttons.MyJToggleButton;
+import com.ischeduler.listener.manipulatetable.AddOrEditEventOnClickDay;
 
 /**
  * Class Month it is used to display a Month of a year in a JPanel Can be used to display any month
@@ -65,8 +65,8 @@ public class Month implements TableManager {
 
     private Calendar          currentDate;
     private Locale            localZone;
-    
-    private final EventKeeper events;
+
+    private final EventKeeper eventsList;
 
 
     public Month() {
@@ -77,8 +77,8 @@ public class Month implements TableManager {
 
         super();
 
-        this.events = new EventKeeper();
-        
+        this.eventsList = new EventKeeper();
+
         if (group.length == 0 || group[0] == null) {
             this.group = new ButtonGroup();
 
@@ -96,7 +96,11 @@ public class Month implements TableManager {
         this.monthTable.add(this.daysTable, BorderLayout.CENTER);
     }
 
-
+    public Month(Date date, EventKeeper ek) {
+        
+        this(date);
+        this.eventsList.setEventList(ek.getEventList());
+    }
     /**
      * 
      */
@@ -139,15 +143,17 @@ public class Month implements TableManager {
         if (!isEmpty) {
 
             MyJToggleButton day = new MyJToggleButton(df.format(this.currentDate.getTime()),
-                    this.currentDate.getTime());
+                    this.currentDate.getTime(), this.eventsList);
             day.setEnabled(true);
             day.setBackground(Color.WHITE);
             // here you add listeners for days ------------------------???>>>>>
 
-            day.addMouseListener(new ChangeOnClick(day.getEvents()));
+            day.addMouseListener(new AddOrEditEventOnClickDay(this.eventsList));
 
             this.group.add(day);
             this.daysGrid.add(day);
+            day.repaint();
+            this.daysGrid.repaint();
         } else {
 
             JButton day = new JButton();
@@ -221,6 +227,18 @@ public class Month implements TableManager {
 
     public ButtonGroup getGroup() {
         return group;
+    }
+
+    @Override
+    public void setEventsList(EventKeeper ek) {
+        this.eventsList.setEventList(ek.getEventList());;
+
+    }
+
+    @Override
+    public EventKeeper getEventsList() {
+        // TODO Auto-generated method stub
+        return this.eventsList;
     }
 
 

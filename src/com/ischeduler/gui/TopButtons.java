@@ -1,6 +1,7 @@
 package com.ischeduler.gui;
 
 import java.awt.GridLayout;
+import java.util.Date;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -10,13 +11,14 @@ import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import javax.swing.border.EmptyBorder;
 
+import com.ischeduler.domain.EventKeeper;
 import com.ischeduler.gui.table.Day;
 import com.ischeduler.gui.table.Month;
 import com.ischeduler.gui.table.TableManager;
 import com.ischeduler.gui.table.Week;
 import com.ischeduler.gui.table.Year;
-import com.ischeduler.listener.ChangeToday;
 import com.ischeduler.listener.ChangeToTable;
+import com.ischeduler.listener.ChangeToday;
 import com.ischeduler.listener.GoNextPrev;
 
 public class TopButtons implements TableManager {
@@ -25,6 +27,7 @@ public class TopButtons implements TableManager {
     private JButton       previous;
     private JButton       next;
     private JButton       today;
+
     private ButtonGroup   selectTable;
     private JToggleButton day;         // change with toggle button - give you two state ;)
     private JToggleButton week;
@@ -48,8 +51,9 @@ public class TopButtons implements TableManager {
 
         this.week = new JToggleButton("Week");
         this.week.setActionCommand("Week");
-        this.week.addActionListener(new ChangeToTable<Week>(gui, new Week()));
-        
+        this.week.addActionListener(
+                new ChangeToTable<Week>(gui, new Week(new Date(), gui.getEventsList())));
+
         this.month = new JToggleButton("Month");
         this.month.setActionCommand("Month");
         this.month.addActionListener(new ChangeToTable<Month>(gui, new Month()));
@@ -57,7 +61,8 @@ public class TopButtons implements TableManager {
         this.year = new JToggleButton("Year");
         this.year.setActionCommand("Year");
         this.year.setSelected(true);
-        this.year.addActionListener(new ChangeToTable<Year>(gui, new Year()));
+        this.year.addActionListener(new ChangeToTable<Year>(gui,
+                new Year(gui.getCurrentDate().getTime(), gui.getEventsList())));
 
         this.buttonsTable.add(previous);
 
@@ -109,6 +114,18 @@ public class TopButtons implements TableManager {
     @Override
     public JComponent getComponent() {
         return this.buttonsTable;
+    }
+
+    @Override
+    public void setEventsList(EventKeeper ek) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public EventKeeper getEventsList() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

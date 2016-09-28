@@ -1,32 +1,35 @@
-package com.ischeduler.gui;
+package com.ischeduler.gui.gridbuttons;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.JToggleButton;
 
 import com.ischeduler.domain.Event;
 import com.ischeduler.domain.EventKeeper;
 
-public class MyJToggleButton extends JToggleButton {
+public class MyJToggleButtonHour extends JToggleButton {
 
     private final EventKeeper events;
-    private final Calendar    currentDate;
+    private Calendar          currentDate;
 
-    public MyJToggleButton(String title, Date date) {
+    public MyJToggleButtonHour(String title, Date date, EventKeeper ek) {
 
         super(title);
+        this.events = ek;
         this.currentDate = Calendar.getInstance();
         this.currentDate.setTime(date);
-        this.events = new EventKeeper();
     }
 
     public void changeBackgroundForEvents() {
 
-        Iterator<Event> it = this.events.getEventList().iterator();
+        List<Event> eventsToday = this.events.getEventsForHour(this.currentDate.getTime());
+
+        Iterator<Event> it = eventsToday.iterator();
         while (it.hasNext()) {
 
             Event e = it.next();
@@ -35,14 +38,19 @@ public class MyJToggleButton extends JToggleButton {
                 return;
             }
         }
-        if (events.allDone()) {
+        
+        EventKeeper ekk = new EventKeeper();
+        ekk.setEventList(eventsToday);
+        
+        if (ekk.allDone()) {
             this.setBackground(Color.GREEN);
             return;
         }
         this.setBackground(Color.WHITE);
     }
+
     @Override
-    protected final void paintComponent(Graphics g){
+    protected final void paintComponent(Graphics g) {
 
         changeBackgroundForEvents();
         super.paintComponent(g);
@@ -51,5 +59,12 @@ public class MyJToggleButton extends JToggleButton {
     public EventKeeper getEvents() {
         return events;
     }
-    
+
+    public Calendar getCurrentDate() {
+        return currentDate;
+    }
+
+    public void setCurrentDate(Calendar currentDate) {
+        this.currentDate = currentDate;
+    }
 }
