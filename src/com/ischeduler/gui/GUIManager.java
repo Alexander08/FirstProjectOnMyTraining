@@ -49,6 +49,7 @@ public class GUIManager {
 
         this.buttonsArea = new TopButtons(this);
         this.window.add(this.buttonsArea.getComponent(), BorderLayout.NORTH);
+        this.window.add(new BottomClock().getClock(), BorderLayout.SOUTH);
 
     }
 
