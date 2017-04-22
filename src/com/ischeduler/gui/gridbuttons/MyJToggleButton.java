@@ -14,6 +14,8 @@ import com.ischeduler.domain.EventKeeper;
 
 public class MyJToggleButton extends JToggleButton {
 
+    private static final long serialVersionUID = 1L;
+  
     private final EventKeeper events;
     private Calendar currentDate;
 

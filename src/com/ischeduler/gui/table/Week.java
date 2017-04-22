@@ -10,7 +10,6 @@ import java.util.Date;
 import java.util.Locale;
 
 import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -28,8 +27,6 @@ public class Week implements TableManager {
     private Calendar          currentDate;
     private Locale            localZone;
     private final EventKeeper eventsList;
-
-
 
     public Week() {
 
@@ -61,8 +58,8 @@ public class Week implements TableManager {
         Day day = new Day(this.currentDate.getTime());
         for (int i = 0; i < 7; i++) {
 
-           day = new Day(this.currentDate.getTime(), day.getGroup());
-           day.setEventsList(this.eventsList);
+            day = new Day(this.currentDate.getTime(), day.getGroup());
+            day.setEventsList(this.eventsList);
 
             // this.group.add(day);
             this.weekGrid.add(day.getComponent());

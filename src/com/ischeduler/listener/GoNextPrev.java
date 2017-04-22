@@ -78,5 +78,4 @@ public class GoNextPrev implements ActionListener {
             }
         }
     }
-// this file was modified
 }

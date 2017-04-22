@@ -3,11 +3,9 @@ package com.ischeduler.data;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.List;
 
@@ -71,6 +69,7 @@ public class WriteDataToFile implements ActionListener {
     public void writeToFile(Object obj){
         
             try {
+                @SuppressWarnings("unchecked")
                 List<Event> myList = (List<Event>) obj;
                 ObjectOutputStream os = this.getOutputStream();
                 os.writeObject(myList);

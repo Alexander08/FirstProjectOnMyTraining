@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -25,12 +24,13 @@ import java.util.List;
  * method for sorting (you need to implement them because of changing index of the element) !Sublist
  * don't have access at them without knowing the index (With set, you can cast them to priority
  * queue)
- * Aretard!
  * 
  */
-public class EventKeeper implements Serializable{
+public class EventKeeper implements Serializable {
 
-    private List<Event> eventList;
+    private static final long serialVersionUID = 1L;
+
+    private List<Event>       eventList;
 
     public EventKeeper() {
 
@@ -149,7 +149,8 @@ public class EventKeeper implements Serializable{
 
         return dateToCompare;
     }
-    public void sortEvents(){
+
+    public void sortEvents() {
         Collections.sort(this.eventList);
     }
 

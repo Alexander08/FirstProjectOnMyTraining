@@ -146,7 +146,6 @@ public class Month implements TableManager {
                     this.currentDate.getTime(), this.eventsList);
             day.setEnabled(true);
             day.setBackground(Color.WHITE);
-            // here you add listeners for days ------------------------???>>>>>
 
             day.addMouseListener(new AddOrEditEventOnClickDay(this.eventsList));
 
@@ -210,8 +209,7 @@ public class Month implements TableManager {
             JButton day = new JButton(df.format(c.getTime()));
             day.setEnabled(false);
             day.setBackground(Color.GRAY);
-            // ***************************** - - ->> this is the place where you can add Listeners!
-            // You don't need listeners on headers silly
+
             this.daysHeaderLabel.add(day);
             c.add(Calendar.DAY_OF_MONTH, 1);
         }

@@ -93,7 +93,8 @@ public class ReadDataFromFile implements ActionListener {
             this.file = this.fileChooser.getSelectedFile();
             prepareInputStream();
 
-            List<Event> list = (List<Event>) readFromFile();
+            @SuppressWarnings("unchecked")
+            List<Event> list =  (List<Event>) readFromFile();
             this.eventList.setEventList(list);
             closeInput();
             message = "Data load from file";

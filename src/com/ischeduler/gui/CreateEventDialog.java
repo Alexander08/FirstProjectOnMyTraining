@@ -12,10 +12,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Locale;
 
-import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.ButtonModel;
 import javax.swing.JButton;
@@ -28,14 +26,12 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import com.ischeduler.domain.Event;
 import com.ischeduler.domain.EventKeeper;
 import com.ischeduler.domain.EventType;
 import com.ischeduler.domain.ToDoType;
-import com.ischeduler.gui.gridbuttons.MyJToggleButton;
 
 public class CreateEventDialog implements ActionListener {
 
@@ -250,8 +246,6 @@ public class CreateEventDialog implements ActionListener {
     }
 
     private JPanel setRadioReminderOption() {
-
-        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 
         JPanel table = new JPanel(new FlowLayout(FlowLayout.LEFT));
 

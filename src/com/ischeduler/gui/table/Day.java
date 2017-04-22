@@ -18,7 +18,6 @@ import javax.swing.SwingConstants;
 
 import com.ischeduler.domain.EventKeeper;
 import com.ischeduler.gui.gridbuttons.MyJToggleButtonHour;
-import com.ischeduler.listener.manipulatetable.AddOrEditEventOnClickDay;
 import com.ischeduler.listener.manipulatetable.AddOrEditEventOnClickHour;
 
 

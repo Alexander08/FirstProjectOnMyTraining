@@ -1,29 +1,30 @@
 package com.ischeduler.domain;
 
 import java.io.Serializable;
-import java.text.DateFormat;
 import java.util.Date;
 
 
 /**
- * This class is a POJO dedicated to keep Events or ToDos in memory and manipulate in all ways
- * Here are all the necessary data for an event. From this will tow particular type of events
- * which will implement their methods and specific business.
+ * This class is a POJO dedicated to keep Events or ToDos in memory and manipulate in all ways Here
+ * are all the necessary data for an event. From this will tow particular type of events which will
+ * implement their methods and specific business.
  * 
- * Another features of this class are serializable and comparator.
- * For easy store, and no lose of data serializable will be the best thing to use,
- * Comparable will be used for an "natural" order for store data using StartDate.
- * hashCode() and equals() will be used to compare two events and give easy access to every event.
- * */
+ * Another features of this class are serializable and comparator. For easy store, and no lose of
+ * data serializable will be the best thing to use, Comparable will be used for an "natural" order
+ * for store data using StartDate. hashCode() and equals() will be used to compare two events and
+ * give easy access to every event.
+ */
 public abstract class Event implements Serializable, Comparable<Event> {
 
-    private String  title;
-    private Date    startDate;
-    private Date    endDate;
-    private Date    reminderDate;
-    private String  description;
-    private Boolean reminder;
-    private Boolean done;
+    private static final long serialVersionUID = 1L;
+
+    private String            title;
+    private Date              startDate;
+    private Date              endDate;
+    private Date              reminderDate;
+    private String            description;
+    private Boolean           reminder;
+    private Boolean           done;
 
     public Event() {
 
@@ -37,7 +38,7 @@ public abstract class Event implements Serializable, Comparable<Event> {
     }
 
     public Event(Date date) {
-        
+
         this(new String(), date, date, date, new String());
     }
 
@@ -52,7 +53,7 @@ public abstract class Event implements Serializable, Comparable<Event> {
         this.reminder = false;
         this.done = false;
     }
-    
+
 
     public String getTitle() {
         return title;
@@ -67,7 +68,7 @@ public abstract class Event implements Serializable, Comparable<Event> {
     }
 
     public void setStartDate(Date startDate) {
-        this.startDate.setTime( startDate.getTime());
+        this.startDate.setTime(startDate.getTime());
     }
 
     public Date getEndDate() {
@@ -111,7 +112,7 @@ public abstract class Event implements Serializable, Comparable<Event> {
     }
 
     @Override
-    public int compareTo(Event e){
+    public int compareTo(Event e) {
 
         return this.startDate.compareTo(e.getStartDate());
     }
@@ -122,5 +123,5 @@ public abstract class Event implements Serializable, Comparable<Event> {
                 + ", reminderDate=" + reminderDate + ", description=" + description + ", reminder="
                 + reminder + ", done=" + done + "]";
     }
-    
+
 }

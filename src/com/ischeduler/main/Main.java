@@ -10,7 +10,8 @@ public class Main {
 
         // GUIManager<Month> gui = new GUIManager<Month>(new Month(new Date()));
 
-        GUIManager gui = new GUIManager(new Day()); // i will set Selected for year by default!
+        GUIManager gui = new GUIManager(new Day()); 
+        // i will set Selected for year by default!
         gui.changeTable( new Year( gui.getCurrentDate().getTime(), gui.getEventsList() ));
         gui.launchFrame();
         gui.setRightSide();

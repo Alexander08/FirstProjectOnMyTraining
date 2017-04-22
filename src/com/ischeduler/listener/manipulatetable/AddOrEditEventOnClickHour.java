@@ -52,8 +52,8 @@ public class AddOrEditEventOnClickHour extends MouseAdapter {
 
                 dialog = new CreateEventDialog(this.events, button.getCurrentDate().getTime(), 1);
 
-                int result = JOptionPane.showConfirmDialog(null, dialog.getDialog(),
-                        "Update Event ", JOptionPane.OK_CANCEL_OPTION);
+                JOptionPane.showConfirmDialog(null, dialog.getDialog(), "Update Event ",
+                        JOptionPane.OK_CANCEL_OPTION);
             }
         }
     }

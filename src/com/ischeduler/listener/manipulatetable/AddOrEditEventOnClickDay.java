@@ -50,7 +50,7 @@ public class AddOrEditEventOnClickDay extends MouseAdapter {
             if (!eventsForDay.isEmpty()) {
 
                 dialog = new CreateEventDialog(this.events, button.getCurrentDate().getTime());
-                int result = JOptionPane.showConfirmDialog(null, dialog.getDialog(),
+                /* int result = */ JOptionPane.showConfirmDialog(null, dialog.getDialog(),
                         "Update Event ", JOptionPane.OK_CANCEL_OPTION);
                
 /*                if(result == JOptionPane.OK_OPTION){
